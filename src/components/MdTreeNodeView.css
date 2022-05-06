@@ -1,0 +1,45 @@
+.emoji {
+  font-weight: 400;
+  font-family: apple color emoji, segoe ui emoji, noto color emoji,
+    android emoji, emojisymbols, emojione mozilla, twemoji mozilla,
+    segoe ui symbol;
+}
+
+.mdTree-node {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #888888;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.mdTree-nodeContent {
+  margin-top: 4px;
+  text-align: left;
+}
+
+.mdTree-nodeContent > h1 {
+  border-bottom: 1px solid #aaaaaa;
+  padding-bottom: 4px;
+}
+
+textarea.mdTree-contentEditor {
+  width: calc(100% - 2px);
+  height: 200px;
+  resize: vertical;
+  font-size: 1.1rem;
+}
+
+.mdTree-nodeMenu {
+  margin-top: 4px;
+  text-align: left;
+}
+
+.mdTree-nodeChildren {
+  margin-top: 4px;
+  text-align: left;
+}
+
+.mdTree-nodeChildren > .mdTree-node {
+  margin: 8px 0;
+}
