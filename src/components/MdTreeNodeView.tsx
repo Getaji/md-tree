@@ -1,13 +1,9 @@
 import { Fragment, useState, useEffect } from "react";
 
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkGfm from "remark-gfm";
-import remarkRehype from "remark-rehype";
-import rehypeStringify from "rehype-stringify";
-
+import { toHTML as markdownToHTML } from "@/markdown";
 import "./MdTreeNodeView.css";
-import { MdTreeNode } from "@/types";
+
+import type { MdTreeNode } from "@/types";
 
 type Props = {
   node: MdTreeNode;
@@ -26,14 +22,9 @@ export const MdTreeNodeView = ({
 
   useEffect(() => {
     (async () => {
-      const file = await unified()
-        .use(remarkParse)
-        .use(remarkGfm)
-        .use(remarkRehype)
-        .use(rehypeStringify)
-        .process(node.content);
+      const html = await markdownToHTML(node.content);
 
-      setContentHTML(String(file));
+      setContentHTML(html);
     })();
   });
 
