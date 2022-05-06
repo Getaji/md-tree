@@ -9,17 +9,17 @@ import type { MdTreeNode } from "@/types";
 type Props = {
   node: MdTreeNode;
   isRoot?: boolean;
-  onChangeNode?: () => void;
+  onChangeNode?: (node: MdTreeNode) => void;
   onDeleteNode?: () => void;
 };
 
 export const MdTreeNodeView = ({
   node: origNode,
   isRoot = false,
-  onChangeNode,
-  onDeleteNode,
+  onChangeNode: nodeChangeHandler,
+  onDeleteNode: nodeDeleteHandler,
 }: Props) => {
-  const [node, setNode] = useState({ ...origNode });
+  const [node, setNode] = useState<MdTreeNode>({ ...origNode });
   const [isEditing, setEditing] = useState(false);
   const [editingContent, setEditingContent] = useState("");
   const [contentHTML, setContentHTML] = useState("");
@@ -46,29 +46,32 @@ export const MdTreeNodeView = ({
   };
   const onClickDelete = () => {
     if (confirm("Do you really want to delete this?")) {
-      if (!isRoot && onDeleteNode) onDeleteNode();
+      if (!isRoot) nodeDeleteHandler?.();
     }
   };
-  const onHandleChangeNode = (node: MdTreeNode, i: number) => {
-    setNode(produce((draft) => {
+  const onChangeNode = (node: MdTreeNode, i: number) => {
+    const newNode = produce(node, (draft) => {
       draft.children[i] = node;
-    }));
-    onChangeNode?.();
+    })
+    setNode(newNode);
+    nodeChangeHandler?.(newNode);
   };
-  const onHandleDeleteNode = (_: MdTreeNode, i: number) => {
-    setNode(produce((draft) => {
+  const onDeleteNode = (_: MdTreeNode, i: number) => {
+    const newNode = produce(node, (draft) => {
       draft.children.splice(i, 1);
-    }));
-    onChangeNode?.();
+    })
+    setNode(newNode);
+    nodeChangeHandler?.(newNode);
   };
   const onClickAddChildren = () => {
-    setNode(produce((draft) => {
+    const newNode = produce(node, (draft) => {
       draft.children.push({
         content: "",
         children: [],
       });
-    }));
-    onChangeNode?.();
+    })
+    setNode(newNode);
+    nodeChangeHandler?.(newNode);
   };
   const onClickImport = (mode = "add") => {
     const json = prompt("json input here");
@@ -141,8 +144,8 @@ export const MdTreeNodeView = ({
           <MdTreeNodeView
             node={child}
             key={i}
-            onChangeNode={onHandleChangeNode.bind(null, child, i)}
-            onDeleteNode={onHandleDeleteNode.bind(null, child, i)}
+            onChangeNode={onChangeNode.bind(null, child, i)}
+            onDeleteNode={onDeleteNode.bind(null, child, i)}
           />
         ))}
         <button
