@@ -61,7 +61,7 @@ export const MdTreeNodeView = ({
       children: [],
     });
   };
-  const onClickImport = (mode: string = "add") => {
+  const onClickImport = (mode = "add") => {
     const json = prompt("json input here");
     if (!json) return;
 
@@ -84,8 +84,8 @@ export const MdTreeNodeView = ({
         default:
           node.children.push(newNode);
       }
-    } catch (e: any) {
-      alert("invalid json input:\n" + e.message);
+    } catch (e) {
+      alert("invalid json input");
       console.error(e);
     }
   };
@@ -104,17 +104,14 @@ export const MdTreeNodeView = ({
 
       <section className="mdTree-nodeMenu">
         {isEditing ? (
-          [
-            <Fragment>
-              <button className="emoji" onClick={onClickOK}>
-                ✔️OK
-              </button>
-              <button className="emoji" onClick={onClickCancel}>
-                ❌Cancel
-              </button>
-            </Fragment>,
-          ]
-        ) : (
+          <Fragment>
+            <button className="emoji" onClick={onClickOK}>
+              ✔️OK
+            </button>
+            <button className="emoji" onClick={onClickCancel}>
+              ❌Cancel
+            </button>
+          </Fragment>) : (
           <button className="emoji" onClick={onClickEdit}>
             ✒️Edit
           </button>
