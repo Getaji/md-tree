@@ -9,6 +9,7 @@ specifiers:
   eslint: ^8.14.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-react: ^7.29.4
+  husky: ^7.0.4
   immer: ^9.0.12
   prettier: ^2.6.2
   react: ^18.0.0
@@ -40,6 +41,7 @@ devDependencies:
   eslint: 8.14.0
   eslint-config-prettier: 8.5.0_eslint@8.14.0
   eslint-plugin-react: 7.29.4_eslint@8.14.0
+  husky: 7.0.4
   prettier: 2.6.2
   typescript: 4.6.4
   vite: 2.9.8
@@ -1519,6 +1521,12 @@ packages:
   /html-void-elements/2.0.1:
     resolution: {integrity: sha512-0quDb7s97CfemeJAnW9wC0hw78MtW7NU3hqtCD75g2vFlDLt36llsYD7uB7SUzojLMP24N5IatXf7ylGXiGG9A==}
     dev: false
+
+  /husky/7.0.4:
+    resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==}
+    engines: {node: '>=12'}
+    hasBin: true
+    dev: true
 
   /ignore/5.2.0:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
