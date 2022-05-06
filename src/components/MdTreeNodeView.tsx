@@ -42,10 +42,11 @@ export const MdTreeNodeView = ({
     setEditing(true);
   };
   const onClickDelete = () => {
-    if (onDeleteNode) onDeleteNode();
+    if (!isRoot && onDeleteNode) onDeleteNode();
   };
-  const onHandleDeleteNode = (node: MdTreeNode, i: number) => {
+  const onHandleDeleteNode = (_: MdTreeNode, i: number) => {
     node.children.splice(i, 1);
+    setNode({ ...node });
   };
   const onClickAddChildren = () => {
     node.children.push({
