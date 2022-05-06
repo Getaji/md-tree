@@ -14,12 +14,11 @@ type Props = {
 };
 
 export const MdTreeNodeView = ({
-  node: origNode,
+  node,
   isRoot = false,
   onChangeNode: nodeChangeHandler,
   onDeleteNode: nodeDeleteHandler,
 }: Props) => {
-  const [node, setNode] = useState<MdTreeNode>({ ...origNode });
   const [isEditing, setEditing] = useState(false);
   const [editingContent, setEditingContent] = useState("");
   const [contentHTML, setContentHTML] = useState("");
@@ -52,15 +51,13 @@ export const MdTreeNodeView = ({
   const onChangeNode = (node: MdTreeNode, i: number) => {
     const newNode = produce(node, (draft) => {
       draft.children[i] = node;
-    })
-    setNode(newNode);
+    });
     nodeChangeHandler?.(newNode);
   };
   const onDeleteNode = (_: MdTreeNode, i: number) => {
     const newNode = produce(node, (draft) => {
       draft.children.splice(i, 1);
-    })
-    setNode(newNode);
+    });
     nodeChangeHandler?.(newNode);
   };
   const onClickAddChildren = () => {
@@ -69,8 +66,7 @@ export const MdTreeNodeView = ({
         content: "",
         children: [],
       });
-    })
-    setNode(newNode);
+    });
     nodeChangeHandler?.(newNode);
   };
   const onClickImport = (mode = "add") => {
