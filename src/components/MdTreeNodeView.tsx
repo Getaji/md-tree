@@ -9,12 +9,14 @@ import type { MdTreeNode } from "@/types";
 type Props = {
   node: MdTreeNode;
   isRoot?: boolean;
+  onChangeNode?: () => void;
   onDeleteNode?: () => void;
 };
 
 export const MdTreeNodeView = ({
   node: origNode,
   isRoot = false,
+  onChangeNode,
   onDeleteNode,
 }: Props) => {
   const [node, setNode] = useState({ ...origNode });
@@ -47,10 +49,17 @@ export const MdTreeNodeView = ({
       if (!isRoot && onDeleteNode) onDeleteNode();
     }
   };
+  const onHandleChangeNode = (node: MdTreeNode, i: number) => {
+    setNode(produce((draft) => {
+      draft.children[i] = node;
+    }));
+    onChangeNode?.();
+  };
   const onHandleDeleteNode = (_: MdTreeNode, i: number) => {
     setNode(produce((draft) => {
       draft.children.splice(i, 1);
     }));
+    onChangeNode?.();
   };
   const onClickAddChildren = () => {
     setNode(produce((draft) => {
@@ -59,6 +68,7 @@ export const MdTreeNodeView = ({
         children: [],
       });
     }));
+    onChangeNode?.();
   };
   const onClickImport = (mode = "add") => {
     const json = prompt("json input here");
@@ -131,6 +141,7 @@ export const MdTreeNodeView = ({
           <MdTreeNodeView
             node={child}
             key={i}
+            onChangeNode={onHandleChangeNode.bind(null, child, i)}
             onDeleteNode={onHandleDeleteNode.bind(null, child, i)}
           />
         ))}
