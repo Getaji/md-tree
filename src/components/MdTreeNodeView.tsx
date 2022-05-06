@@ -1,6 +1,7 @@
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import produce from "immer";
 
+import { EmojiButton } from "./EmojiButton";
 import { toHTML as markdownToHTML } from "@/markdown";
 import "./MdTreeNodeView.css";
 
@@ -10,7 +11,7 @@ type Props = {
   node: MdTreeNode;
   isRoot?: boolean;
   onChangeNode?: (node: MdTreeNode) => void;
-  onDeleteNode?: () => void;
+  onDeleteNode?: (node: MdTreeNode) => void;
 };
 
 export const MdTreeNodeView = ({
@@ -45,7 +46,7 @@ export const MdTreeNodeView = ({
   };
   const onClickDelete = () => {
     if (confirm("Do you really want to delete this?")) {
-      if (!isRoot) nodeDeleteHandler?.();
+      if (!isRoot) nodeDeleteHandler?.(node);
     }
   };
   const onChangeNode = (node: MdTreeNode, i: number) => {
@@ -60,7 +61,7 @@ export const MdTreeNodeView = ({
     });
     nodeChangeHandler?.(newNode);
   };
-  const onClickAddChildren = () => {
+  const onClickAddChild = () => {
     const newNode = produce(node, (draft) => {
       draft.children.push({
         content: "",
@@ -115,24 +116,16 @@ export const MdTreeNodeView = ({
 
       <section className="mdTree-nodeMenu">
         {isEditing ? (
-          <Fragment>
-            <button className="emoji" onClick={onClickOK}>
-              ✔️OK
-            </button>
-            <button className="emoji" onClick={onClickCancel}>
-              ❌Cancel
-            </button>
-          </Fragment>
+          <>
+            <EmojiButton emoji="✔️" onClick={onClickOK}>OK</EmojiButton>
+            <EmojiButton emoji="❌" onClick={onClickCancel}>Cancel</EmojiButton>
+          </>
         ) : (
-          <button className="emoji" onClick={onClickEdit}>
-            ✒️Edit
-          </button>
+          <EmojiButton emoji="✒️" onClick={onClickEdit}>Edit</EmojiButton>
         )}
 
         {!isRoot && (
-          <button className="emoji" onClick={onClickDelete}>
-            🗑️Delete
-          </button>
+          <EmojiButton emoji="🗑️" onClick={onClickDelete}>Delete</EmojiButton>
         )}
       </section>
       <section className="mdTree-nodeChildren">
@@ -144,27 +137,10 @@ export const MdTreeNodeView = ({
             onDeleteNode={onDeleteNode.bind(null, child, i)}
           />
         ))}
-        <button
-          className="mdTree-addChildren emoji"
-          onClick={onClickAddChildren}
-        >
-          ➕Add Child
-        </button>
-        <button
-          className="mdTree-import emoji"
-          onClick={onClickImport.bind(null, "overwrite")}
-        >
-          📩Import(Overwrite)
-        </button>
-        <button
-          className="mdTree-import emoji"
-          onClick={onClickImport.bind(null, "add")}
-        >
-          📩Import(Add)
-        </button>
-        <button className="mdTree-export emoji" onClick={onClickExport}>
-          💾Export
-        </button>
+        <EmojiButton emoji="➕" onClick={onClickAddChild}>Delete</EmojiButton>
+        <EmojiButton emoji="📩" onClick={onClickImport.bind(null, "overwrite")}>Import(Overwrite)</EmojiButton>
+        <EmojiButton emoji="📩" onClick={onClickImport.bind(null, "add")}>Import(Add)</EmojiButton>
+        <EmojiButton emoji="💾" onClick={onClickExport}>Export</EmojiButton>
       </section>
     </article>
   );
