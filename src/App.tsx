@@ -15,7 +15,7 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <MdTreeNodeView node={node} isRoot onChangeNode={onChangeNode} />
     </div>
   );
