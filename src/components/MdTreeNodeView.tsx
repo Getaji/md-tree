@@ -1,10 +1,10 @@
 import { Fragment, useState, useEffect } from "react";
 
-import {unified} from 'unified'
-import remarkParse from 'remark-parse'
-import remarkGfm from 'remark-gfm'
-import remarkRehype from 'remark-rehype'
-import rehypeStringify from 'rehype-stringify'
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
 
 import "./MdTreeNodeView.css";
 import { MdTreeNode } from "@/types";
@@ -32,10 +32,10 @@ export const MdTreeNodeView = ({
         .use(remarkRehype)
         .use(rehypeStringify)
         .process(node.content);
-      
+
       setContentHTML(String(file));
     })();
-  })
+  });
 
   const onClickOK = () => {
     node.content = editingContent;
@@ -99,7 +99,10 @@ export const MdTreeNodeView = ({
       {isEditing ? (
         <textarea className="mdTree-contentEditor" value={editingContent} />
       ) : (
-        <section className="mdTree-nodeContent" dangerouslySetInnerHTML={{ __html: contentHTML }} />
+        <section
+          className="mdTree-nodeContent"
+          dangerouslySetInnerHTML={{ __html: contentHTML }}
+        />
       )}
 
       <section className="mdTree-nodeMenu">
@@ -111,7 +114,8 @@ export const MdTreeNodeView = ({
             <button className="emoji" onClick={onClickCancel}>
               ❌Cancel
             </button>
-          </Fragment>) : (
+          </Fragment>
+        ) : (
           <button className="emoji" onClick={onClickEdit}>
             ✒️Edit
           </button>
