@@ -1,4 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
+import produce from "immer";
 
 import { toHTML as markdownToHTML } from "@/markdown";
 import "./MdTreeNodeView.css";
@@ -47,15 +48,17 @@ export const MdTreeNodeView = ({
     }
   };
   const onHandleDeleteNode = (_: MdTreeNode, i: number) => {
-    node.children.splice(i, 1);
-    setNode({ ...node });
+    setNode(produce((draft) => {
+      draft.children.splice(i, 1);
+    }));
   };
   const onClickAddChildren = () => {
-    node.children.push({
-      content: "",
-      children: [],
-    });
-    setNode({ ...node });
+    setNode(produce((draft) => {
+      draft.children.push({
+        content: "",
+        children: [],
+      });
+    }));
   };
   const onClickImport = (mode = "add") => {
     const json = prompt("json input here");

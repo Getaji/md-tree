@@ -9,6 +9,7 @@ specifiers:
   eslint: ^8.14.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-react: ^7.29.4
+  immer: ^9.0.12
   prettier: ^2.6.2
   react: ^18.0.0
   react-dom: ^18.0.0
@@ -21,6 +22,7 @@ specifiers:
   vite: ^2.9.7
 
 dependencies:
+  immer: 9.0.12
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   rehype-stringify: 9.0.3
@@ -1522,6 +1524,10 @@ packages:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
     engines: {node: '>= 4'}
     dev: true
+
+  /immer/9.0.12:
+    resolution: {integrity: sha512-lk7UNmSbAukB5B6dh9fnh5D0bJTOFKxVg2cyJWTYrWRfhLrLMBquONcUs3aFq507hNoIZEDDh8lb8UtOizSMhA==}
+    dev: false
 
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
