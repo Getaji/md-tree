@@ -12,10 +12,11 @@ type Props = {
 };
 
 export const MdTreeNodeView = ({
-  node,
+  node: origNode,
   isRoot = false,
   onDeleteNode,
 }: Props) => {
+  const [node, setNode] = useState({ ...origNode });
   const [isEditing, setEditing] = useState(false);
   const [editingContent, setEditingContent] = useState("");
   const [contentHTML, setContentHTML] = useState("");
@@ -51,6 +52,7 @@ export const MdTreeNodeView = ({
       content: "",
       children: [],
     });
+    setNode({ ...node });
   };
   const onClickImport = (mode = "add") => {
     const json = prompt("json input here");
