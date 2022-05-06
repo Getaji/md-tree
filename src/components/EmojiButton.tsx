@@ -4,7 +4,7 @@ import "./EmojiButton.css";
 interface Props extends ComponentPropsWithoutRef<"button"> {
   emoji: string;
   children?: ReactNode | ReactNode[];
-};
+}
 
 export const EmojiButton = ({ emoji, children, ...rest }: Props) => (
   <button className="emojiButton" {...rest}>

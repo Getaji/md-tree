@@ -117,15 +117,23 @@ export const MdTreeNodeView = ({
       <section className="mdTree-nodeMenu">
         {isEditing ? (
           <>
-            <EmojiButton emoji="✔️" onClick={onClickOK}>OK</EmojiButton>
-            <EmojiButton emoji="❌" onClick={onClickCancel}>Cancel</EmojiButton>
+            <EmojiButton emoji="✔️" onClick={onClickOK}>
+              OK
+            </EmojiButton>
+            <EmojiButton emoji="❌" onClick={onClickCancel}>
+              Cancel
+            </EmojiButton>
           </>
         ) : (
-          <EmojiButton emoji="✒️" onClick={onClickEdit}>Edit</EmojiButton>
+          <EmojiButton emoji="✒️" onClick={onClickEdit}>
+            Edit
+          </EmojiButton>
         )}
 
         {!isRoot && (
-          <EmojiButton emoji="🗑️" onClick={onClickDelete}>Delete</EmojiButton>
+          <EmojiButton emoji="🗑️" onClick={onClickDelete}>
+            Delete
+          </EmojiButton>
         )}
       </section>
       <section className="mdTree-nodeChildren">
@@ -137,10 +145,18 @@ export const MdTreeNodeView = ({
             onDeleteNode={onDeleteNode.bind(null, child, i)}
           />
         ))}
-        <EmojiButton emoji="➕" onClick={onClickAddChild}>Delete</EmojiButton>
-        <EmojiButton emoji="📩" onClick={onClickImport.bind(null, "overwrite")}>Import(Overwrite)</EmojiButton>
-        <EmojiButton emoji="📩" onClick={onClickImport.bind(null, "add")}>Import(Add)</EmojiButton>
-        <EmojiButton emoji="💾" onClick={onClickExport}>Export</EmojiButton>
+        <EmojiButton emoji="➕" onClick={onClickAddChild}>
+          Delete
+        </EmojiButton>
+        <EmojiButton emoji="📩" onClick={onClickImport.bind(null, "overwrite")}>
+          Import(Overwrite)
+        </EmojiButton>
+        <EmojiButton emoji="📩" onClick={onClickImport.bind(null, "add")}>
+          Import(Add)
+        </EmojiButton>
+        <EmojiButton emoji="💾" onClick={onClickExport}>
+          Export
+        </EmojiButton>
       </section>
     </article>
   );
